@@ -80,33 +80,31 @@ public class CalculatorPanel extends JPanel {
 
     private void valuePerformed(ActionEvent ae) {
         char ch = ae.getActionCommand().charAt(0);
-        if (!s0.equals("") && result == Double.valueOf(s0) && s1.equals("")){
+        if (!s0.equals("") && result == Double.parseDouble(s0) && s1.equals("")){
             result = 0;
             s0 = ""+ch;
         }
 
         else{
             if (s1.equals("")){
-                if ((s0.equals("0") || s0.equals("")) && ch == '0')
-                {}
-                else {
+                if (!((s0.equals("0") || s0.equals("")) && ch == '0')){
                     s0 = s0+ch;
                 }
             }
 
             else{
-                if ((s0.equals("0") || s0.equals("")) && ch == '0')
-                {}
-                else {
+                if (!((s0.equals("0") || s0.equals("")) && ch == '0')) {
                     s2 = s2 + ch;
                 }
             }
         }
-        display.setText(
-                (s0.equals("") && s1.equals("") && s2.equals("")) ?
-                        "0" :
-                        (s0+s1+s2)
-        );
+
+        if (s0.equals("") && s1.equals("") && s2.equals("")){
+            display.setText("0");
+        }
+        else{
+            display.setText(displayDoubleInt(s0,s1,s2));
+        }
     }
     private void operatorPerformed(ActionEvent ae) {
         char ch = ae.getActionCommand().charAt(0);
@@ -128,12 +126,7 @@ public class CalculatorPanel extends JPanel {
             else{
                 result = (s0.equals("")) ? 0 : Double.parseDouble(s0);
             }
-            if (result % 1 != 0){
-                display.setText(""+result);
-            }
-            else{
-                display.setText(""+ (int)result);
-            }
+            display.setText(displayDoubleInt(result));
 
             s0 = Double.toString(result);
             s1=s2="";
@@ -141,7 +134,25 @@ public class CalculatorPanel extends JPanel {
 
         else{
             s1 = Character.toString(ch);
-            display.setText(s0+s1+s2);
+            display.setText(displayDoubleInt(s0,s1,s2));
+        }
+    }
+
+    private String displayDoubleInt (String str0, String str1, String str2){
+        if (Double.parseDouble(str0) % 1 != 0){
+            return str0+str1+str2;
+        }
+        else{
+            return ((int)Double.parseDouble(str0)) +str1+str2;
+        }
+    }
+
+    private String displayDoubleInt (double res){
+        if (res % 1 != 0){
+            return ""+res;
+        }
+        else{
+            return ""+(int)res;
         }
     }
 }
