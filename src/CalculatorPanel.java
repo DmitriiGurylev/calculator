@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class CalculatorPanel extends JPanel {
+    private JMenuBar menu;
     private JLabel display;
     private JPanel panel;
 
@@ -32,14 +33,41 @@ public class CalculatorPanel extends JPanel {
 
     public CalculatorPanel(){
         setLayout(new BorderLayout());
+
+        //Font font = new Font("Verdana", Font.PLAIN, 12);
+        menu = new JMenuBar();
+        JMenu choose = new JMenu("Choose");
+        JMenuItem commonCacl = new JMenuItem("Common Calculator");
+        choose.add(commonCacl);
+
+        JMenu background = new JMenu("Background");
+        JMenuItem light = new JMenuItem("Light");
+        JMenuItem dark = new JMenuItem("Dark");
+        background.add(light);
+        background.add(dark);
+
+        dark.addActionListener(this::setLightBackground);
+        light.addActionListener(this::setDarkBackground);
+
+        JMenu info = new JMenu("Info");
+        JMenuItem about = new JMenuItem("About");
+        info.add(about);
+
+
+        add(menu, BorderLayout.NORTH);
+        menu.add(choose);
+        menu.add(background);
+        menu.add(info);
+
         display = new JLabel("0"); // добавляет дисплей
         display.setEnabled(false); // не позволяет взаимодействовать с полем дисплея
-        add(display, BorderLayout.NORTH); // отображает дисплей сверху
+        add(display); // отображает дисплей
         display.setFont(new Font(display.getFont().getName(), display.getFont().getStyle(), 40));
-        display.setBorder(BorderFactory.createEmptyBorder(0,5,10,0));
+        display.setBorder(BorderFactory.createEmptyBorder(0,5,0,0));
+
         panel = new JPanel(); // добавление панели
         panel.setLayout(new GridLayout(5,4, 2,2)); // табличное расположение
-        add(panel); // добавляет панель
+        add(panel, BorderLayout.SOUTH); // добавляет панель
         panel.setVisible(true);
 
         // добавление кнопок на панель
@@ -203,6 +231,14 @@ public class CalculatorPanel extends JPanel {
 
     private String dotProcessor (String str){
         return (str.contains(".")) ? "" : ".";
+    }
+
+    private void setLightBackground(ActionEvent ae) {
+        panel.setBackground(Color.GRAY);
+    }
+
+    private void setDarkBackground(ActionEvent ae) {
+        panel.setBackground(Color.white);
     }
 }
 
