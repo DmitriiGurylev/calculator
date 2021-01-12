@@ -45,13 +45,13 @@ public class CalculatorPanel extends JPanel {
         JMenuItem dark = new JMenuItem("Dark");
         background.add(light);
         background.add(dark);
-
         dark.addActionListener(this::setLightBackground);
         light.addActionListener(this::setDarkBackground);
 
         JMenu info = new JMenu("Info");
         JMenuItem about = new JMenuItem("About");
         info.add(about);
+        about.addActionListener(this::createAboutWIndow);
 
 
         add(menu, BorderLayout.NORTH);
@@ -239,6 +239,10 @@ public class CalculatorPanel extends JPanel {
 
     private void setDarkBackground(ActionEvent ae) {
         panel.setBackground(Color.white);
+    }
+
+    private void createAboutWIndow(ActionEvent ae) {
+        new AboutWindow();
     }
 }
 
