@@ -7,8 +7,8 @@ public class Calculator {
 
     Calculator(){
         JFrame calculatorFrame = new JFrame("Calculator"); // создает окно калькулятора c называнием рамки
+        calculatorFrame.setSize(400,300); // задает размер окна
         calculatorFrame.setLocationRelativeTo(null);
-        calculatorFrame.setSize(500,500); // задает размер окна
         calculatorFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // закрывает процесс
         calculatorFrame.add(new CalculatorPanel()); // добавляет панель в окно калькулятора
         calculatorFrame.setVisible(true); // задает видимоcть фигуры

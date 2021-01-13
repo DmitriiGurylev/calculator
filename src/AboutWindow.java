@@ -9,9 +9,12 @@ public class AboutWindow extends JFrame {
 
     public AboutWindow(){
         JFrame aboutWindowFrame = new JFrame("About");
-        aboutWindowFrame.setLocationRelativeTo(null);
         aboutWindowFrame.setSize(600,400);
-        aboutWindowFrame.setLayout(new BorderLayout());
+        aboutWindowFrame.setLocationRelativeTo(null);
+        JPanel aboutPanel = new JPanel();
+        aboutPanel.setLayout(new BoxLayout(aboutPanel, BoxLayout.Y_AXIS));
+        aboutWindowFrame.add(aboutPanel);
+
 
 
         try {
@@ -20,13 +23,13 @@ public class AboutWindow extends JFrame {
             Image scaledImg = img.getScaledInstance(70,70,Image.SCALE_SMOOTH);
             JLabel headImage = new JLabel(new ImageIcon(scaledImg));
             headImage.setSize(70,70);
-            aboutWindowFrame.add(headImage);
+            aboutPanel.add(headImage);
         }
         catch (IOException e) {
             e.printStackTrace();
         }
         JLabel description = new JLabel();
-        aboutWindowFrame.add(description);
+        aboutPanel.add(description);
         description.setText("<html><h2>What is this?</h2>" +
                 "This calculator has been created by Dmitry Gurylev (Moscow) " +
                 "as a pet project. <br><br>" +

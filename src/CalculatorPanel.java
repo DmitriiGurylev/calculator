@@ -31,14 +31,22 @@ public class CalculatorPanel extends JPanel {
     JButton bDot = new JButton(".");
     JButton bFactorial = new JButton("!");
 
+
     public CalculatorPanel(){
         setLayout(new BorderLayout());
+
+        JPanel panelMenuDisplay = new JPanel();
+        JPanel panelDigits = new JPanel();
+        panelMenuDisplay.setLayout(new BorderLayout());
+        panelDigits.setLayout(new BorderLayout());
+        add(panelMenuDisplay, BorderLayout.NORTH);
+        add(panelDigits, BorderLayout.CENTER);
 
         //Font font = new Font("Verdana", Font.PLAIN, 12);
         menu = new JMenuBar();
         JMenu choose = new JMenu("Choose");
-        JMenuItem commonCacl = new JMenuItem("Common Calculator");
-        choose.add(commonCacl);
+        JMenuItem commonCalc = new JMenuItem("Common Calculator");
+        choose.add(commonCalc);
 
         JMenu background = new JMenu("Background");
         JMenuItem light = new JMenuItem("Light");
@@ -54,20 +62,21 @@ public class CalculatorPanel extends JPanel {
         about.addActionListener(this::createAboutWIndow);
 
 
-        add(menu, BorderLayout.NORTH);
+        panelMenuDisplay.add(menu, BorderLayout.NORTH);
         menu.add(choose);
         menu.add(background);
         menu.add(info);
 
         display = new JLabel("0"); // добавляет дисплей
         display.setEnabled(false); // не позволяет взаимодействовать с полем дисплея
-        add(display); // отображает дисплей
-        display.setFont(new Font(display.getFont().getName(), display.getFont().getStyle(), 40));
+        panelMenuDisplay.add(display, BorderLayout.SOUTH); // добавляет дисплей на панель
+        display.setFont(new Font(display.getFont().getName(), display.getFont().getStyle(), 30));
         display.setBorder(BorderFactory.createEmptyBorder(0,5,0,0));
 
         panel = new JPanel(); // добавление панели
         panel.setLayout(new GridLayout(5,4, 2,2)); // табличное расположение
-        add(panel, BorderLayout.SOUTH); // добавляет панель
+        panelDigits.add(panel, BorderLayout.CENTER); // добавляет панель
+        panel.setSize(500,200);
         panel.setVisible(true);
 
         // добавление кнопок на панель
@@ -89,6 +98,27 @@ public class CalculatorPanel extends JPanel {
         panel.add(bMinus);
         panel.add(bPlus);
         panel.add(bFactorial);
+
+        Font newFont = new Font(b1.getFont().getName(), b1.getFont().getStyle(), 20);
+
+        b1.setFont(newFont);
+        b2.setFont(newFont);
+        b3.setFont(newFont);
+        b4.setFont(newFont);
+        b5.setFont(newFont);
+        b6.setFont(newFont);
+        b7.setFont(newFont);
+        b8.setFont(newFont);
+        b9.setFont(newFont);
+        b0.setFont(newFont);
+        bDelete.setFont(newFont);
+        bMultiply.setFont(newFont);
+        bDivide.setFont(newFont);
+        bDot.setFont(newFont);
+        bEqual.setFont(newFont);
+        bMinus.setFont(newFont);
+        bPlus.setFont(newFont);
+        bFactorial.setFont(newFont);
 
         panel.setBackground(Color.GRAY);
 
